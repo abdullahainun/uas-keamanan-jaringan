@@ -1,6 +1,6 @@
 skenario
 email security 
-buatlah 2 mail server dengan komponen
++ buatlah 2 mail server dengan komponen
     - MTA postfix
     - MTU roundcube
     - MTD courier-imap

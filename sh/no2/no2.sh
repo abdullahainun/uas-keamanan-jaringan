@@ -5,3 +5,10 @@ service apache2 restart
 cp validate.php index.php /var/www/html
 cp -R PHPOTP /var/www/html
 rm /var/www/html/index.html
+mkdir /var/www/html/log
+chown www-data:www-data /var/www/html/log
+cat jail.conf >> /etc/fail2ban/jail.conf
+cp wwwku.conf /etc/fail2ban/filter.d
+
+# if error
+# sudo a2dismod mpm_event && sudo a2enmod mpm_prefork && sudo a2enmod php7.0
