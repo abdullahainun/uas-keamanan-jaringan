@@ -1,4 +1,4 @@
-# skenario portcentry
+# skenario portsentry
 
 Jika ada yang melakukan scanning terhadap komputer target, maka target akan melakukan
   - pengeblokan (30%)
