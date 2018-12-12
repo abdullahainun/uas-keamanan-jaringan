@@ -19,4 +19,4 @@ berikut adalah panduan uas kemanan jaringan komputer. berikut adalah skenario da
     - MTD courier-imap
     terdapat mesin DNS bind9 domain selain c307.eepis-its.edu
     setiap email server memiliki fitur pengiriman email terenkripsi
-    [panduan](no3readme.md)
+    [panduan](no4readme.md)
