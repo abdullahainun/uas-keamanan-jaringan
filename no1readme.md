@@ -1,83 +1,100 @@
-# skenario
+# skenario portcentry
 
-+ jika ada yang melakukan scanning terhadap komputer target, maka target akan melakukan
+Jika ada yang melakukan scanning terhadap komputer target, maka target akan melakukan
   - pengeblokan (30%)
   - email ke admin (70%)
   - memerintahkan komputer lainnya untuk juga melakukan blokir terhadap ip penyerang (100%)
 
-# point 1
-install aplikasi
+# point 1 (pengeblokan dan memerintahkan komputer lainnya untuk memblokir terhadap ip lainnya)
+1. install aplikasi
 
-`sudo apt-get install portsentry nmap`
+```
+    sudo apt-get install portsentry nmap
+```
 
-# kofigurasi
+2. kofigurasi
 
-`nano /etc/default/portsentry`
+```
+    nano /etc/default/portsentry
+```
+
+ganti isi konfigurasi berikut ini
 ```
     TCP_MODE="tcp"
     UDP_MODE="udp"
 ```
-ke
-`TCP_MODE="atcp" UDP_MODE="audp"`
-`nano /etc/portsentry/portsentry.conf block_udp = "2" block_tcp = "2"`
+menjadi seperti ini
+```
+    TCP_MODE="atcp" 
+    UDP_MODE="audp"
+```
+setelah itu edit `nano /etc/portsentry/portsentry.conf` dan ubah seperti ini
 
 ```
+    BLOCK_UDP="2"
+    BLOCK_TCP="2"
+
     KILL_RUN_CMD_FIRST = "0"
     KILL_RUN_CMD="/sbin/route add -host $TARGET$ reject; /etc/portsentry/kill_cmd.sh $TARGET$
     $PORT$ $MODE$"
 ```
+3. buat file baru /etc/portsentry/kill_cmd.sh
+```
+    #!/bin/bash
+    # send email
+    sendmail abdullahainun97@gmail.com << END
+    Subject: Port Scan Detected
+    From: Ainun Abdullah
+    Someone @$1 scanned on host $HOSTNAME on port $2
+    Cheers,
+        Portsentry
+    END
+    # command other server to block
+    # ubah alamat server pembantu
+    ssh root@10.252.108.103 /sbin/route add -host $1 reject
+```
+
+Ubah file permission
+```
+    chmod +x /etc/portsentry/kill_cmd.sh
+```
+
+cek tabel route dengan perintah __route -n__ jikaseperti ini maka portsentry sudah bekerja
+```
+root@training:~# route -n
+Kernel IP routing table
+Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
+0.0.0.0         10.148.0.1      0.0.0.0         UG    0      0        0 eth0
+5.188.206.22    -               255.255.255.255 !H    0      -        0 -
+10.148.0.1      0.0.0.0         255.255.255.255 UH    0      0        0 eth0
+24.5.66.158     -               255.255.255.255 !H    0      -        0 -
 
 ```
-#!/bin/bash
-# send email
-sendmail arviantiyulia16@gmail.com << END
-Subject: Port Scan Detected
-From: Misbahul Ardani
-Someone @$1 scanned on host $HOSTNAME on port $2
-Cheers,
-Portsentry
-END
-# command other server to block
-# ubah alamat server pembantu
-ssh root@10.252.108.103 /sbin/route add -host $1 reject
+
+
+4 melakukan email notifikasi
+
+Installing ssmtp
 ```
-lakukan nmap ke ip firewall
-`route del -host ip-attacker reject`
+    apt-get install ssmtp
+```
+Ubah file /etc/ssmtp/ssmtp.conf
+```
+    # -- smtp.gmail.com--
+    UseSTARTTLS=YES
+    root=abdullahainun97@gmail.com
+    mailhub=smtp.gmail.com:587
+    AuthUser=abdullahainun97@gmail.com
+    AuthPass="kodeappanda"
+    FromLineoverride=YES
+```
 
-# cara melakukan email notifikasi
+Ubah file /etc/ssmtp/revaliases tambahkan di akhir baris
+```
+    root: abdullahainun97@gmail.com:smtp.gmail.com:587
+```
 
-## set proxy
 
-export http_proxy='http://proxyServerSddress:proxyPort'  
-export https_proxy='https://proxyServerSddress:proxyPort'
-
-# Installing msmtp
-
-apt-get install msmtp
-vim ~/.msmtprc
-account pens
-tls on
-auth on
-host mail.student.pens.ac.id
-port 587
-user abdullahainun@it.student.pens.ac.id
-from abdullahainun@it.student.pens.ac.id
-password
-
-# smtp google configuration
-
-SMTP server (i.e., outgoing mail): smtp.gmail.com
-SMTP username: Your full Gmail or Google Apps email address (e.g. example@gmail.com or example@yourdomain.com)
-SMTP password: Your Gmail or Google Apps email password
-SMTP port: 465
-SMTP TLS/SSL required: yes
-
-http://nixnote.blogspot.com/2013/10/configuring-logcheck-on-ubuntu.html
-aptitude install logcheck
-nano /etc/logcheck/logcheck.logfiles
-
-https://websistent.com/how-to-use-msmtp-with-gmail-yahoo-and-php-mail/
-
-https://linuxaria.com/pills/logcheck-scan-your-logs-and-warns-you
-
-apt-get purge -y portsentry nmap msmtp mutt
+oke, untuk memastikan bahwa email anda sudah terkirim silahkan cek dengan 
+`tailf /var/log/mail.log` 
+dan melihat tabel routing dengan perintah `route -n` dan bila anda ingin melepaskan blok dapat menggunakan `route del -host ipadd reject`
