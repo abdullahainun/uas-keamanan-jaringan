@@ -7,10 +7,13 @@ berikut adalah panduan uas kemanan jaringan komputer. berikut adalah skenario da
         - email ke admin (70%)
         - memerintahkan komputer lainnya untuk juga melakukan blokir terhadap ip penyerang (100%)
 
-Jawaban 
+[panduan](no1readme.md)
+
 2. pada saat melakukan kesalahaan pada login yang terdiri dari username password dan otp, maka saat terjadi kesalahan 3 kali
         - blokir ip address pengguna selama 5 menit (40%)
         - selama ip terblokir pengguna atau penyerang mendapat informasi bahwa ip terblokir, misal di infokan dengan maaf akses kami terblokir "silahkan tunggu 5 menit lagi" (60 - 100%)
+
+[panduan](no2readme.md)
 
 3. buatlah 2 mail server dengan komponen
         - MTA postfix
@@ -18,3 +21,5 @@ Jawaban
         - MTD courier-imap
 terdapat mesin DNS bind9 domain selain c307.eepis-its.edu
 setiap email server memiliki fitur pengiriman email terenkripsi
+
+[panduan](no3readme.md)
