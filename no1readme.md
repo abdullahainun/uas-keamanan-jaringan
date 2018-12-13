@@ -105,5 +105,7 @@ Sebelum melakukan konfigurasi
 1. aktifkan 2 factor authentication pada email Anda
 
 <a href="https://myaccount.google.com/u/1/security" target="_blank">https://myaccount.google.com/u/1/security</a>
+
 2. jika sudah generate app password
+
 <a href="https://security.google.com/settings/security/apppasswords" target="_blank">https://security.google.com/settings/security/apppasswords</a>
