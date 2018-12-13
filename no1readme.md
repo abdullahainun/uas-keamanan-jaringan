@@ -98,3 +98,11 @@ Ubah file /etc/ssmtp/revaliases tambahkan di akhir baris
 oke, untuk memastikan bahwa email anda sudah terkirim silahkan cek dengan 
 `tailf /var/log/mail.log` 
 dan melihat tabel routing dengan perintah `route -n` dan bila anda ingin melepaskan blok dapat menggunakan `route del -host ipadd reject`
+
+
+*) catatan*
+Sebelum melakukan konfigurasi
+1. aktifkan 2 factor authentication pada email Anda
+[https://myaccount.google.com/u/1/security](https://myaccount.google.com/u/1/security){:target="_blank"}
+2. jika sudah generate app password
+[https://security.google.com/settings/security/apppasswords](https://security.google.com/settings/security/apppasswords){:target="_blank"}
