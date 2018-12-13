@@ -103,6 +103,7 @@ dan melihat tabel routing dengan perintah `route -n` dan bila anda ingin melepas
 *) catatan*
 Sebelum melakukan konfigurasi
 1. aktifkan 2 factor authentication pada email Anda
-[https://myaccount.google.com/u/1/security](https://myaccount.google.com/u/1/security){:target="_blank"}
+
+<a href="https://myaccount.google.com/u/1/security" target="_blank">https://myaccount.google.com/u/1/security</a>
 2. jika sudah generate app password
-[https://security.google.com/settings/security/apppasswords](https://security.google.com/settings/security/apppasswords){:target="_blank"}
+<a href="https://security.google.com/settings/security/apppasswords" target="_blank">https://security.google.com/settings/security/apppasswords</a>
