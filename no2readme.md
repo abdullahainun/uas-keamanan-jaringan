@@ -74,10 +74,22 @@ buat folder untuk virtualhost baru
     chmod -R 755 /var/www/html
     cd /etc/apache2/sites-available/
     cp 000-default.conf firewall.conf
+```
+isi firewall.conf seperti ini
+```
+    <VirtualHost *:8080>
+        ServerAdmin webmaster@localhost
+        DocumentRoot /var/www/html/firewall
+        ErrorLog ${APACHE_LOG_DIR}/error.log
+        CustomLog ${APACHE_LOG_DIR}/access.log combined
+    </VirtualHost>
+```
+
+```
     sudo a2ensite firewall.conf
     sudo service apache2 reload
 ```
-edit halaman warning 
+edit halaman warning yang ingin ditampilkan
 ```bash
     nano /var/www/html/firewall/index.php
 ```
@@ -86,6 +98,8 @@ kemudian isikan sesuai keinginan anda seperti ini
 ```php
     <?php echo "Maaf akses anda di blokir selama 5 menit"; ?>
 ```
+
+okee, sekian semoga beruntung.. thanks
 
 
 
